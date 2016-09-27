@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use CodersLabBundle\Entity\Groups;
+use CodersLabBundle\Form\Type\GroupType; 
 
 class GroupController extends Controller {
     
@@ -17,11 +18,7 @@ class GroupController extends Controller {
      */
     public function addAction(Request $req) {
         $group = new Groups();
-        $form = $this->createFormBuilder($group)
-                ->add('title','text', array('label' => 'NAZWA GRUPY: '))
-                ->add('description', 'textarea', array('label' => 'OPIS: '))
-                ->add('save', 'submit', array('label' => 'Zapisz'))
-                ->getForm();
+        $form = $this->createForm(new GroupType(), $group);
         $form->handleRequest($req);
         
         if ($req->getMethod() === 'POST') {
@@ -95,7 +92,7 @@ class GroupController extends Controller {
         $group = $rep->find($id);
         
         $form = $this->createFormBuilder()
-                ->add('person','entity', array('class' => 'CodersLabBundle:Persons', 'choice_label' => 'surnameName', 'label' => 'WYBIERZ KONTAKT:', 'choice_name' => 'id'))
+                ->add('person','entity', array('class' => 'CodersLabBundle:Persons', 'choice_label' => 'surnameName', 'label' => 'WYBIERZ KONTAKT:'))
                 ->add('save', 'submit', array('label' => 'Dodaj'))
                 ->getForm();
         $form->handleRequest($req);

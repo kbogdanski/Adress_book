@@ -6,8 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
-use CodersLabBundle\Entity\Persons;
 use CodersLabBundle\Entity\Emails;
+use CodersLabBundle\Form\Type\EmailType; 
 
 class EmailController extends Controller 
 {
@@ -19,11 +19,7 @@ class EmailController extends Controller
         $email = new Emails();
         $rep = $this->getDoctrine()->getRepository('CodersLabBundle:Persons');
         $person = $rep->find($id);
-        $form = $this->createFormBuilder($email)
-                ->add('email','text', array('label' => 'ADRES EMAIL: '))
-                ->add('type', 'text', array('label' => 'TYP (np. służbowy, prywatny): '))
-                ->add('save', 'submit', array('label' => 'Dodaj'))
-                ->getForm();
+        $form = $this->createForm(new EmailType(), $email);
         $form->handleRequest($req);
         
         
@@ -53,11 +49,7 @@ class EmailController extends Controller
         $person = $email->getPerson();
         $idPerson = $person->getId();
         
-        $form = $this->createFormBuilder($email)
-                ->add('email','text', array('label' => 'ADRES EMAIL: '))
-                ->add('type', 'text', array('label' => 'TYP (np. służbowy, prywatny): '))
-                ->add('save', 'submit', array('label' => 'Zapisz'))
-                ->getForm();
+        $form = $this->createForm(new EmailType(), $email);
         $form->handleRequest($req);
         
         if ($req->getMethod() === 'POST') {

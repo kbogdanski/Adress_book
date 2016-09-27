@@ -6,8 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
-use CodersLabBundle\Entity\Persons;
 use CodersLabBundle\Entity\Phones;
+use CodersLabBundle\Form\Type\PhoneType;
 
 class PhoneController extends Controller {
     
@@ -19,11 +19,7 @@ class PhoneController extends Controller {
         $phone = new Phones();
         $rep = $this->getDoctrine()->getRepository('CodersLabBundle:Persons');
         $person = $rep->find($id);
-        $form = $this->createFormBuilder($phone)
-                ->add('phoneNumber','text', array('label' => 'NUMER TELEFONU: '))
-                ->add('type', 'text', array('label' => 'TYP (np. służbowy, prywatny): '))
-                ->add('save', 'submit', array('label' => 'Dodaj'))
-                ->getForm();
+        $form = $this->createForm(new PhoneType(), $phone);
         $form->handleRequest($req);
         
         
@@ -53,11 +49,7 @@ class PhoneController extends Controller {
         $person = $phone->getPerson();
         $idPerson = $person->getId();
         
-        $form = $this->createFormBuilder($phone)
-                ->add('phoneNumber','text', array('label' => 'NUMER TELEFONU: '))
-                ->add('type', 'text', array('label' => 'TYP (np. służbowy, prywatny): '))
-                ->add('save', 'submit', array('label' => 'Zapisz'))
-                ->getForm();
+        $form = $this->createForm(new PhoneType(), $phone);
         $form->handleRequest($req);
         
         if ($req->getMethod() === 'POST') {

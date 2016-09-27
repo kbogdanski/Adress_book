@@ -6,9 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use CodersLabBundle\Entity\Persons;
 use CodersLabBundle\Entity\Adress;
+use CodersLabBundle\Form\Type\AdresType;
 
 class AdresController extends Controller {
     
@@ -20,13 +19,7 @@ class AdresController extends Controller {
         $adres = new Adress();
         $rep = $this->getDoctrine()->getRepository('CodersLabBundle:Persons');
         $person = $rep->find($id);
-        $form = $this->createFormBuilder($adres)
-                ->add('city','text', array('label' => 'MIASTO: '))
-                ->add('street', 'text', array('label' => 'ULICA: '))
-                ->add('houseNumber', 'text', array('label' => 'NUMER BUDYNKU: '))
-                ->add('apartmentNumber', 'text', array('label' => 'NUMER MIESZKANIA: '))
-                ->add('save', 'submit', array('label' => 'Dodaj'))
-                ->getForm();
+        $form = $this->createForm(new AdresType(), $adres);
         $form->handleRequest($req);
         
         
@@ -56,13 +49,7 @@ class AdresController extends Controller {
         $person = $adres->getPerson();
         $idPerson = $person->getId();
         
-        $form = $this->createFormBuilder($adres)
-                ->add('city','text', array('label' => 'MIASTO: '))
-                ->add('street', 'text', array('label' => 'ULICA: '))
-                ->add('houseNumber', 'text', array('label' => 'NUMER BUDYNKU: '))
-                ->add('apartmentNumber', 'text', array('label' => 'NUMER MIESZKANIA: '))
-                ->add('save', 'submit', array('label' => 'Zapisz'))
-                ->getForm();
+        $form = $this->createForm(new AdresType(), $adres);
         $form->handleRequest($req);
         
         if ($req->getMethod() === 'POST') {

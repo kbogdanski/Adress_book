@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Groups
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="CodersLabBundle\Entity\GroupsRepository")
+ * @ORM\Entity
  */
 class Groups
 {

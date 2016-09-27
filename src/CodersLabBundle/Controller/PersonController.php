@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use CodersLabBundle\Entity\Persons;
+use CodersLabBundle\Form\Type\PersonType; 
 
 class PersonController extends Controller {
     
@@ -18,20 +19,15 @@ class PersonController extends Controller {
     public function indexAction() {
         return array();
     }
+    
 
-        /**
+    /**
      * @Route("/new")
      * @Template()
      */
     public function newAction(Request $req) {
         $person = new Persons();
-        $form = $this->createFormBuilder($person)
-                ->add('name','text', array('label' => 'IMIĘ: '))
-                ->add('surname', 'text', array('label' => 'NAZWISKO: '))
-                ->add('description', 'textarea', array('label' => 'OPIS: '))
-                ->add('photo', 'file', array('label' => 'FOTO: '))
-                ->add('save', 'submit', array('label' => 'Zapisz'))
-                ->getForm();
+        $form = $this->createForm(new PersonType(), $person);
         $form->handleRequest($req);
         
         if ($req->getMethod() === 'POST') {
@@ -42,7 +38,6 @@ class PersonController extends Controller {
                 if (isset($file)) {
                     $fileName = md5(uniqid()).'.'.$file->guessExtension();
                     $file->move('photos',$fileName);
-
                     $newPerson->setPhoto($fileName);
                 } else {
                     $newPerson->setPhoto('brak.jpg');
@@ -97,7 +92,15 @@ class PersonController extends Controller {
         return array('persons' => $persons);
     }
 
-    
+    private function modifyPersonForm($person) {
+        $form = $this->createFormBuilder($person)
+                ->add('name','text', array('label' => 'IMIĘ: '))
+                ->add('surname', 'text', array('label' => 'NAZWISKO: '))
+                ->add('description', 'text', array('label' => 'OPIS: '))
+                ->add('save', 'submit', array('label' => 'Zapisz'))
+                ->getForm();
+        return $form;
+    }
 
     /**
      * @Route("/{id}/modify", requirements={"id"="\d+"})
@@ -107,12 +110,7 @@ class PersonController extends Controller {
         $rep = $this->getDoctrine()->getRepository('CodersLabBundle:Persons');
         $person = $rep->find($id);
         
-        $form = $this->createFormBuilder($person)
-                ->add('name','text', array('label' => 'IMIĘ: '))
-                ->add('surname', 'text', array('label' => 'NAZWISKO: '))
-                ->add('description', 'text', array('label' => 'OPIS: '))
-                ->add('save', 'submit', array('label' => 'Zapisz'))
-                ->getForm();
+        $form = $this->modifyPersonForm($person);
         $form->handleRequest($req);
         
         if ($req->getMethod() === 'POST') {
