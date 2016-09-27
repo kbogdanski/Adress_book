@@ -1,0 +1,53 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Szczegóły grupy{% endblock %}
+
+{% block body %}
+    
+    <div class="row">
+        <div class="col-xs-3"></div>
+        <div class="col-xs-6">
+            
+            {% if status is defined %}
+                <div class="alert alert-danger center-block">{{status}}</div>
+            {%endif%}
+            
+            <table class="table">
+                <tr>
+                    <td>Nazwa grupy:</td>
+                    <td>{{ group.title }}</td>
+                </tr>
+                <tr>
+                    <td>Opis:</td>
+                    <td>{{ group.description }}</td>
+                </tr>
+                <tr>
+                    <td><a class="btn btn-xs btn-primary" href="/{{group.id}}/addPersonToGroup">Dodaj kontakt</a></td>
+                    <td><a class="btn btn-xs btn-danger" href="/{{group.id}}/deleteGroup">Usuń grupę</a></td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-xs-3"></div>
+    </div>
+    
+    <br><br><br>
+    <div class="row">
+        <div class="col-xs-2"></div>
+            <center>
+                <div class="list-group col-xs-6">
+                    {% for person in group.persons %}
+                        <a href="/{{person.id}}" class="list-group-item">{{ person.surname }} {{ person.name }}</a>
+                    {%endfor%}
+                </div>
+            </center>
+            <center>
+                <div class="list-group col-xs-2">
+                    {% for person in group.persons %}
+                        <a href="/{{group.id}}/{{person.id}}/deletePersonForGroup" class="list-group-item list-group-item-danger">Usuń z grupy</a>
+                    {%endfor%}
+                </div>
+            </center>
+        <div class="col-xs-2"></div>
+    </div>
+
+{% endblock %}

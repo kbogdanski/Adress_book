@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}
+            <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+            <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+        {% endblock %}
+        {% block javascripts %}
+            <script src="{{ asset('js/jquery-1.12.4.min.js') }}"></script>
+            <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+        {% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    {% block header %}<img width="100%" src="{{ asset("photos/address_book.jpg") }}">{% endblock %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th><a class="btn btn-xs btn-primary" href="/">All</a></th>
+                                <th><a class="btn btn-xs btn-primary" href="/A">A</a></th>
+                                <th><a class="btn btn-xs btn-primary" href="/B">B</a></th>
+                                <th><a class="btn btn-xs btn-primary" href="/C">C</a></th>
+                                <th><a class="btn btn-xs btn-primary" href="/D">D</a></th>
+                                <th><a class="btn btn-xs btn-primary" href="/E">E</a></th>
+                                <th><a class="btn btn-xs btn-primary" href="/F">F</a></th>
+                                <th><a class="btn btn-xs btn-primary" href="/G">G</a></th>
+                                <th><a class="btn btn-xs btn-primary" href="/H">H</a></th>
+                                <th><a class="btn btn-xs btn-primary" href="/I">I</a></th>
+                                <th><a class="btn btn-xs btn-primary" href="/J">J</a></th>
+                                <th><a class="btn btn-xs btn-primary" href="/K">K</a></th>
+                                <th><a class="btn btn-xs btn-primary" href="/L">L</a></th>
+                                <th><a class="btn btn-xs btn-primary" href="/M">M</a></th>
+                                <th><a class="btn btn-xs btn-primary" href="/N">N</a></th>
+                                <th><a class="btn btn-xs btn-primary" href="/O">O</a></th>
+                                <th><a class="btn btn-xs btn-primary" href="/P">P</a></th>
+                                <th><a class="btn btn-xs btn-primary" href="/Q">Q</a></th>
+                                <th><a class="btn btn-xs btn-primary" href="/R">R</a></th>
+                                <th><a class="btn btn-xs btn-primary" href="/S">S</a></th>
+                                <th><a class="btn btn-xs btn-primary" href="/T">T</a></th>
+                                <th><a class="btn btn-xs btn-primary" href="/U">U</a></th>
+                                <th><a class="btn btn-xs btn-primary" href="/V">V</a></th>
+                                <th><a class="btn btn-xs btn-primary" href="/W">W</a></th>
+                                <th><a class="btn btn-xs btn-primary" href="/X">X</a></th>
+                                <th><a class="btn btn-xs btn-primary" href="/Y">Y</a></th>
+                                <th><a class="btn btn-xs btn-primary" href="/Z">Z</a></th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-3">
+                    <a href="/index" class="btn btn-success btn-lg btn-block">Strona główna</a>
+                    <a href="/" class="btn btn-success btn-lg btn-block">Pokaż wszystkich</a>
+                    <a href="/new" class="btn btn-success btn-lg btn-block">Dodaj kontakt</a>
+                    <a href="/searchSurname" class="btn btn-success btn-lg btn-block">Szukaj po nazwisku</a>
+                    <a href="/searchName" class="btn btn-success btn-lg btn-block">Szukaj po imieniu</a>
+                    <a href="/group" class="btn btn-success btn-lg btn-block">Grupy</a>
+                </div>
+                <div class="col-xs-9">
+                    {% block body %}{% endblock %}
+                </div>
+            </div>
+        </div>
+
+        {% block footer %}
+        <nav class="navbar navbar-default navbar-inverse navbar-fixed-bottom" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <span class="text-info">Projekt na zaliczenie Warsztatów nr 5 w CodersLab.</span><br>
+                    <span class="text-info">Autor: Kamil Bogdański. Create: 09.2016</span>
+                </div>
+            </div>
+        </nav>
+        {% endblock %}
+    </body>
+</html>

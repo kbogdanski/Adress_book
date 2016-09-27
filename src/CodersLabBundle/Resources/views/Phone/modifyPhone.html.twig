@@ -1,0 +1,24 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Edytuj telefon{% endblock %}
+
+{% block body %}
+    <h1> <span class="label label-primary"> Edycja numer telefonu dla {{person.surname}} {{person.name}} </span> </h1><br>
+
+{{ form_start(form, {'attr': {'novalidate': 'novalidate', 'class' : 'col-xs-7'} }) }}
+    <div class="form-group">
+        {{ form_label(form.phoneNumber) }}
+        {{ form_widget(form.phoneNumber, { 'attr': { 'class' : 'form-control' } }) }}
+        {{ form_errors(form.phoneNumber) }}
+    </div>
+    
+    <div class="form-group">
+        {{ form_label(form.type) }}
+        {{ form_widget(form.type, { 'attr': { 'class' : 'form-control' } }) }}
+        {{ form_errors(form.type) }}
+    </div>
+    
+        {{ form_widget(form.save, { 'attr' : {'class' : 'btn btn-success'} }) }}
+{{ form_end(form) }}
+
+{% endblock %}

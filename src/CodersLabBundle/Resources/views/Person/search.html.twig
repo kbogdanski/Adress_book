@@ -1,0 +1,23 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Wyszukiwanie{% endblock %}
+
+{% block body %}
+
+    <h1> <span class="label label-primary"> Szukaj kontakt </span> </h1><br>
+
+{{ form_start(form, {'attr': {'class' : 'col-xs-7'} }) }}    
+    <div class="form-group">
+        {{ form_label(form.searchString) }}
+        {{ form_widget(form.searchString, { 'attr': { 'class' : 'form-control' } }) }}
+    </div>
+    
+        {{ form_widget(form.save, { 'attr' : {'class' : 'btn btn-success'} }) }}
+{{ form_end(form) }}
+
+{% if data is defined %}
+    {{dump(data)}}
+    {{dump(persons)}}
+{%endif%}
+
+{% endblock %}

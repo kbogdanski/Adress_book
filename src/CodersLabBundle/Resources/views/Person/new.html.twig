@@ -1,0 +1,39 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Dodaj kontakt{% endblock %}
+
+{% block body %}
+
+    <h1> <span class="label label-primary"> Dodaj nową osobę </span> </h1><br>
+
+{{ form_start(form, {'attr': {'novalidate': 'novalidate', 'class' : 'col-xs-7'} }) }}
+    <div class="form-group">
+        {{ form_label(form.name) }}
+        {{ form_widget(form.name, { 'attr': { 'class' : 'form-control' } }) }}
+        {{ form_errors(form.name) }}
+    </div>
+    
+    <div class="form-group">
+        {{ form_label(form.surname) }}
+        {{ form_widget(form.surname, { 'attr': { 'class' : 'form-control' } }) }}
+        {{ form_errors(form.surname) }}
+    </div>
+    
+    <div class="form-group">
+        {{ form_label(form.description) }}
+        {{ form_widget(form.description, { 'attr': { 'class' : 'form-control', 'rows' : '4' } }) }}
+        {{ form_errors(form.description) }}
+    </div>
+    
+    <div class="form-group">
+        {{ form_label(form.photo) }}
+        {{ form_widget(form.photo) }}
+        <p class="help-block">Akceptowalne formaty to jpg lub png (rozmiar pliku < 1MB)</p>
+        {{ form_errors(form.photo) }}
+    </div>
+    
+        {{ form_widget(form.save, { 'attr' : {'class' : 'btn btn-success'} }) }}
+{{ form_end(form) }}
+
+
+{% endblock %}

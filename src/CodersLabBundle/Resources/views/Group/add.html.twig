@@ -1,0 +1,25 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Dodaj grupę{% endblock %}
+
+{% block body %}
+
+    <h1> <span class="label label-primary"> Dodaj nową grupę </span> </h1><br>
+
+{{ form_start(form, {'attr': {'novalidate': 'novalidate', 'class' : 'col-xs-7'} }) }}
+    <div class="form-group">
+        {{ form_label(form.title) }}
+        {{ form_widget(form.title, { 'attr': { 'class' : 'form-control' } }) }}
+        {{ form_errors(form.title) }}
+    </div>
+    
+    <div class="form-group">
+        {{ form_label(form.description) }}
+        {{ form_widget(form.description, { 'attr': { 'class' : 'form-control', 'rows' : '4' } }) }}
+    </div>
+    
+        {{ form_widget(form.save, { 'attr' : {'class' : 'btn btn-success'} }) }}
+{{ form_end(form) }}
+
+
+{% endblock %}

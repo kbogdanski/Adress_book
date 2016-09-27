@@ -1,0 +1,19 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Dodaj Grupę do Kontaktu{% endblock %}
+
+{% block body %}
+    
+    <h1> <span class="label label-primary"> Dodaj kontakt {{ person.name }} {{ person.surname }} do grupy</span> </h1><br>
+
+{{ form_start(form, {'attr': {'novalidate': 'novalidate', 'class' : 'col-xs-7'} }) }}
+    <div class="form-group">
+        {{ form_label(form.group) }}
+        {{ form_widget(form.group, { 'attr': { 'class' : 'form-control' } }) }}
+        {{ form_errors(form.group) }}
+    </div>
+    
+        {{ form_widget(form.save, { 'attr' : {'class' : 'btn btn-success'} }) }}
+{{ form_end(form) }}
+
+{% endblock %}

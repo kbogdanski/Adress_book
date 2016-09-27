@@ -1,0 +1,119 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Szczegóły kontaktu{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-xs-3"><img src="/photos/{{person.photo}}" width="200" height="200"></div>
+        <div class="col-xs-9">
+            <table class="table">
+                <tr>
+                    <td>Nazwisko:</td>
+                    <td colspan="2">{{ person.surname }}</td>
+                </tr>
+                <tr>
+                    <td>Imie:</td>
+                    <td colspan="2">{{ person.name }}</td>
+                </tr>
+                <tr>
+                    <td>Opis:</td>
+                    <td colspan="2">{{ person.description }}</td>
+                </tr>
+                <tr>
+                    <td>Grupy:</td>
+                    <td colspan="2">
+                        {% for group in person.groups %}
+                            <a href="/group/{{group.id}}">{{ group.title }}</a>  
+                        {% endfor %}
+                    </td>
+                </tr>
+                <tr>
+                    <td><a class="btn btn-xs btn-primary" href="/{{person.id}}/modify">Edytuj</a></td>
+                    <td>
+                        <a class="btn btn-xs btn-primary" href="/{{person.id}}/modifyfoto">Zmień zdjęcie</a>
+                        <a class="btn btn-xs btn-primary" href="/{{person.id}}/addGroupToPerson">Dodaj grupę</a>
+                    </td>
+                    <td><a class="btn btn-xs btn-danger" href="/{{person.id}}/delete">Usuń kontakt<a/></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <br><br><br>
+    <div class="row">
+        <div class="col-xs-4">
+            {% for adres in person.adress %}
+                <table class="table table-bordered">
+                    <tr>
+                        <td>Miasto:</td>
+                        <td>{{ adres.city }}</td>
+                    </tr>
+                    <tr>
+                        <td>Ulica:</td>
+                        <td>{{ adres.street }} {{ adres.houseNumber }} {% if adres.apartmentNumber != null %} / {{ adres.apartmentNumber }} {% endif %}</td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2">
+                            <a class="btn btn-xs btn-info" href="/{{adres.id}}/modifyAdres">Edytuj</a>
+                            <a class="btn btn-xs btn-danger" href="/{{adres.id}}/deleteAdres">Usuń</a>
+                        </td>
+                    </tr>
+                </table>
+            {%endfor%}
+            <table class="table table-bordered">
+                <tr><td><a class="btn btn-xs btn-primary center-block" href="/{{person.id}}/addAdres">Dodaj nowy adres</a></td></tr>
+            </table>
+        </div>
+        
+        <div class="col-xs-4">
+            {% for email in person.emails %}
+                <table class="table table-bordered">
+                    <tr>
+                        <td>Email:</td>
+                        <td>{{ email.email }}</td>
+                    </tr>
+                    <tr>
+                        <td>Typ:</td>
+                        <td>{{ email.type }}</td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2">
+                            <a class="btn btn-xs btn-info" href="/{{email.id}}/modifyEmail">Edytuj</a>
+                            <a class="btn btn-xs btn-danger" href="/{{email.id}}/deleteEmail">Usuń</a>
+                        </td>
+                    </tr>
+                </table>
+            {%endfor%}
+            <table class="table table-bordered">
+                <tr><td><a class="btn btn-xs btn-primary center-block" href="/{{person.id}}/addEmail">Dodaj nowy email</a></td></tr>
+            </table>
+        </div>
+        
+        <div class="col-xs-4">
+            {% for phone in person.phones %}
+                <table class="table table-bordered">
+                    <tr>
+                        <td>Numer tel:</td>
+                        <td>{{ phone.phoneNumber }}</td>
+                    </tr>
+                    <tr>
+                        <td>Typ:</td>
+                        <td>{{ phone.type }}</td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2">
+                            <a class="btn btn-xs btn-info" href="/{{phone.id}}/modifyPhone">Edytuj</a>
+                            <a class="btn btn-xs btn-danger" href="/{{phone.id}}/deletePhone">Usuń</a>
+                        </td>
+                    </tr>
+                </table>
+            {%endfor%}
+            <table class="table table-bordered">
+                <tr><td><a class="btn btn-xs btn-primary center-block" href="/{{person.id}}/addPhone">Dodaj nowy numer telefonu</a></td></tr>
+            </table>
+        </div>
+    </div>
+       
+{% endblock %}
