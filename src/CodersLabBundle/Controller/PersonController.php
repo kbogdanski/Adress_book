@@ -87,7 +87,7 @@ class PersonController extends Controller {
      */
     public function showPersonOnLetter($letter) {
         $rep = $this->getDoctrine()->getRepository('CodersLabBundle:Persons');
-        $persons = $rep->getPersonsLetter($letter);
+        $persons = $rep->getPersonByPartOfName($letter);
         
         return array('persons' => $persons);
     }

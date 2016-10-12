@@ -12,13 +12,13 @@ use Doctrine\ORM\EntityRepository;
  */
 class PersonsRepository extends EntityRepository {
     
-    public function getPersonsLetter($letter) {
+    public function getPersonByPartOfName($partOfName) {
         $em = $this->getEntityManager();
 
         $query = $em->createQuery(
             "SELECT person
             FROM CodersLabBundle:Persons person WHERE
-            person.surname LIKE '$letter%'");
+            person.surname LIKE '$partOfName%'");
 
         return $query->getResult();
     }
